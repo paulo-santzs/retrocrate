@@ -14,15 +14,17 @@ jobs:
     name: Create and inspect the real container
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    env:
+      DBX_CONTAINER_MANAGER: docker
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Install Distrobox and Podman
+      - name: Install Distrobox and check Docker
         run: |
           sudo apt-get update
-          sudo apt-get install --yes distrobox podman
-          podman info
+          sudo apt-get install --yes distrobox
+          docker info
           distrobox version
 
       - name: Preview and create RetroCrate
