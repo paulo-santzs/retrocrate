@@ -1,0 +1,42 @@
+name: Linux Distrobox smoke check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  distrobox-smoke:
+    name: Create and inspect the real container
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install Distrobox and Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes distrobox podman
+          podman info
+          distrobox version
+
+      - name: Preview and create RetroCrate
+        run: ./scripts/setup.sh --apply
+
+      - name: Check installed emulators and cores
+        run: |
+          ./scripts/doctor.sh
+          distrobox enter retrocrate -- bash -lc '
+            set -e
+            for package in retroarch dolphin-emu ppsspp mame libretro-mgba libretro-snes9x libretro-genesis-plus-gx libretro-mupen64plus-next libretro-beetle-psx libretro-ppsspp libretro-mame; do
+              pacman -Q "$package"
+            done
+          '
+
+      - name: Export desktop launchers
+        run: ./scripts/export-apps.sh
