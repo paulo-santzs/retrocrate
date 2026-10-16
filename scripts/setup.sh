@@ -78,5 +78,7 @@ echo
 echo "Creating RetroCrate. This downloads an Arch Linux image and installs the listed packages."
 distrobox assemble create --file "$MANIFEST"
 echo
-echo "RetroCrate is ready. Open it with: distrobox enter retrocrate"
-echo "The manifest exports RetroArch, Dolphin, PPSSPP and MAME to the host app launcher when supported."
+echo "The container was created. Its first entry installs the packages in the manifest."
+echo "Run this from a normal interactive Linux terminal and wait for setup to finish:"
+echo "  distrobox enter retrocrate"
+echo "Then, if needed, export the app launchers with: ./scripts/export-apps.sh"

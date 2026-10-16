@@ -28,17 +28,7 @@ jobs:
           distrobox version
 
       - name: Preview and create RetroCrate
-        run: script -q -e -c './scripts/setup.sh --apply' /dev/null
+        run: ./scripts/setup.sh --apply
 
-      - name: Check installed emulators and cores
-        run: |
-          ./scripts/doctor.sh
-          distrobox enter retrocrate -- bash -lc '
-            set -e
-            for package in retroarch dolphin-emu ppsspp mame libretro-mgba libretro-snes9x libretro-genesis-plus-gx libretro-mupen64plus-next libretro-beetle-psx libretro-ppsspp libretro-mame; do
-              pacman -Q "$package"
-            done
-          '
-
-      - name: Export desktop launchers
-        run: ./scripts/export-apps.sh
+      - name: Verify emulators and export launchers
+        run: script -q -e -c './scripts/ci-smoke.sh' /dev/null

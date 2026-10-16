@@ -69,11 +69,11 @@ Para um host com GPU NVIDIA e drivers proprietários já instalados:
 ./scripts/setup.sh --gpu nvidia --apply
 ```
 
-A configuração não substitui caixas existentes (`replace=false`). Os scripts não instalam pacotes no host e não removem containers automaticamente. A primeira criação pode levar alguns minutos.
+A configuração não substitui caixas existentes (`replace=false`). Os scripts não instalam pacotes no host e não removem containers automaticamente. A imagem é baixada durante a criação; **na primeira entrada interativa**, o Distrobox inicializa o Arch e instala os pacotes. Essa etapa pode levar alguns minutos.
 
 ## Usar
 
-Entre no ambiente:
+Entre no ambiente em um terminal interativo e espere a primeira instalação terminar:
 
 ```bash
 distrobox enter retrocrate
