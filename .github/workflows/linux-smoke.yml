@@ -21,12 +21,16 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Install Distrobox and Podman
+      - name: Install current stable Distrobox and Podman
         run: |
           sudo apt-get update
-          sudo apt-get install --yes distrobox podman
-          podman info
+          sudo apt-get install --yes podman
+          curl --fail --silent --show-error --location \
+            https://raw.githubusercontent.com/89luca89/distrobox/1.8.2.5/install \
+            --output /tmp/distrobox-install
+          sudo sh /tmp/distrobox-install --prefix /usr/local
           distrobox version
+          podman info
 
       - name: Preview and create RetroCrate
         run: ./scripts/setup.sh --apply

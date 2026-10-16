@@ -53,6 +53,20 @@ if ! command -v distrobox >/dev/null 2>&1; then
   exit 1
 fi
 
+minimum_distrobox_version="1.8.2.4"
+installed_distrobox_version="$(distrobox version 2>&1 | grep -Eo '[0-9]+(\.[0-9]+){2,3}' | head -n 1 || true)"
+if [[ -z "$installed_distrobox_version" ]]; then
+  echo "Could not determine the installed Distrobox version." >&2
+  exit 1
+fi
+oldest_version="$(printf '%s\n%s\n' "$minimum_distrobox_version" "$installed_distrobox_version" | sort -V | head -n 1)"
+if [[ "$oldest_version" != "$minimum_distrobox_version" ]]; then
+  echo "Distrobox $installed_distrobox_version is too old; RetroCrate requires $minimum_distrobox_version or newer." >&2
+  echo "Update Distrobox on the host, then run this script again." >&2
+  exit 1
+fi
+echo "Distrobox $installed_distrobox_version detected (minimum: $minimum_distrobox_version)."
+
 if ! command -v podman >/dev/null 2>&1 && ! command -v docker >/dev/null 2>&1; then
   echo "No Podman or Docker command was found. Install and configure one container engine first." >&2
   exit 1

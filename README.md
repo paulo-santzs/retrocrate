@@ -31,7 +31,7 @@ Os pacotes são solicitados pelos nomes dos repositórios oficiais do Arch Linux
 
 ## Requisitos e limites
 
-- Host Linux `x86_64` com Distrobox e Podman ou Docker instalados e funcionando.
+- Host Linux `x86_64` com Distrobox **1.8.2.4 ou superior** e Podman ou Docker instalados e funcionando.
 - Conexão à internet e espaço em disco para a imagem e os emuladores.
 - Uma sessão gráfica funcional no host para abrir os emuladores.
 - **Windows nativo e macOS não são alvos suportados.** WSL pode exigir configuração própria de vídeo, áudio, GPU e dispositivos; não é validado por este projeto.
@@ -125,6 +125,7 @@ Os manifestos são deliberadamente simples:
 - [`distrobox-nvidia.ini`](distrobox-nvidia.ini): mesmo conjunto de pacotes, com integração NVIDIA habilitada.
 - `replace=false`: uma atualização do manifesto não apaga nem recria uma caixa existente.
 - `root=false` e `init=false`: caixa de usuário, sem sistema init separado.
+- O script exige Distrobox 1.8.2.4+, versão mínima que evita um erro de inicialização presente em versões mais antigas ao preparar o usuário da imagem Arch atual.
 
 Para personalizar a lista, edite `additional_packages` usando nomes de pacotes válidos para a arquitetura. Antes de aplicar alterações, faça uma prévia com `distrobox assemble create --file distrobox.ini --dry-run`. Alterações em uma caixa já criada devem ser instaladas/atualizadas dentro dela; o manifesto não é um gerenciador de migrações.
 
