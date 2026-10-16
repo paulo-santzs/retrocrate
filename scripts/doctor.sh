@@ -32,7 +32,12 @@ if ! distrobox list | grep -Eq '(^|[[:space:]])retrocrate([[:space:]]|$)'; then
 fi
 
 echo "Container '$BOX_NAME' found. Checking installed launchers..."
-distrobox enter "$BOX_NAME" -- bash -lc '
+ENTER_FLAGS=()
+if [[ "${RETROCRATE_DEBUG:-false}" == true ]]; then
+  ENTER_FLAGS+=(--verbose)
+fi
+
+distrobox enter "${ENTER_FLAGS[@]}" "$BOX_NAME" -- bash -lc '
   missing=0
   for app in retroarch dolphin-emu PPSSPPSDL mame; do
     if command -v "$app" >/dev/null 2>&1; then
