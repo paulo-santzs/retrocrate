@@ -15,20 +15,20 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
-      DBX_CONTAINER_MANAGER: docker
+      DBX_CONTAINER_MANAGER: podman
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Install Distrobox and check Docker
+      - name: Install Distrobox and Podman
         run: |
           sudo apt-get update
-          sudo apt-get install --yes distrobox
-          docker info
+          sudo apt-get install --yes distrobox podman
+          podman info
           distrobox version
 
       - name: Preview and create RetroCrate
-        run: script -q -e -c './scripts/setup.sh --apply' /dev/null
+        run: ./scripts/setup.sh --apply
 
       - name: Verify emulators and export launchers
         run: script -q -e -c './scripts/ci-smoke.sh' /dev/null
