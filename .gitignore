@@ -1,0 +1,11 @@
+# Keep personal game data outside the repository. These paths are ignored if
+# someone creates them locally while experimenting with the project.
+/roms/
+/bios/
+/saves/
+/states/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp
