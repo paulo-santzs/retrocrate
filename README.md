@@ -146,6 +146,13 @@ RetroCrate foi criado independentemente a partir da ideia geral de descrever um 
 
 Contribuições pequenas e reproduzíveis são bem-vindas. Veja [`CONTRIBUTING.md`](CONTRIBUTING.md) e [`SECURITY.md`](SECURITY.md). Não envie ROMs, BIOS, firmware, dumps de jogos, credenciais ou arquivos pessoais.
 
+## Referências técnicas
+
+- [Distrobox: criação de containers](https://distrobox.it/usage/distrobox-create/)
+- [Distrobox: manifestos e assemble](https://distrobox.it/usage/distrobox-assemble/)
+- [Distrobox: exportação de aplicativos](https://distrobox.it/usage/distrobox-export/)
+- [Pacotes oficiais do Arch Linux](https://archlinux.org/packages/)
+
 ## English summary
 
 RetroCrate is an original, manifest-driven Distrobox setup for a curated set of official Arch Linux emulators and Libretro cores. It supports a preview-before-create workflow and optional NVIDIA driver integration. It targets Linux x86_64; it does not provide games, ROMs, BIOS or firmware, and Distrobox is not a security sandbox. See the Portuguese guide above for setup and operational details.
