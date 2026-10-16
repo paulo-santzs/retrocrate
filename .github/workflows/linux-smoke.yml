@@ -28,7 +28,7 @@ jobs:
           distrobox version
 
       - name: Preview and create RetroCrate
-        run: ./scripts/setup.sh --apply
+        run: script -q -e -c './scripts/setup.sh --apply' /dev/null
 
       - name: Verify emulators and export launchers
         run: script -q -e -c './scripts/ci-smoke.sh' /dev/null
